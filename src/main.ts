@@ -12,7 +12,7 @@ async function start() {
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('stadium project')
-    .setDescription('Mini project for stadium finding')
+    .setDescription('Mini project for hospital')
     .setVersion('1.0')
     .addTag(
       `
@@ -32,4 +32,3 @@ async function start() {
 }
 start();
 
-//hello world

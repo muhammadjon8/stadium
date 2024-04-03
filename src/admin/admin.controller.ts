@@ -8,6 +8,7 @@ import {
   Delete,
   HttpCode,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
@@ -15,6 +16,8 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 import { LoginAdminDto } from './dto/login-admin.dto';
 import { Response } from 'express';
 import { Cookiegetter } from '../decorators/cookie_getter.decorator';
+import { AdminGuard } from '../guards/admin.guard';
+import { SelfAdminGuard } from '../guards/self.admin.guard';
 
 @Controller('admin')
 export class AdminController {
@@ -36,7 +39,7 @@ export class AdminController {
   ) {
     return this.adminService.login(loginUserDto, res);
   }
-
+  @UseGuards(AdminGuard)
   @HttpCode(200)
   @Post('logout')
   logout(
@@ -60,7 +63,8 @@ export class AdminController {
   findAll() {
     return this.adminService.findAllAdmins();
   }
-
+  @UseGuards(SelfAdminGuard)
+  @UseGuards(AdminGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.adminService.findAdminById(+id);

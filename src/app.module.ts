@@ -21,6 +21,15 @@ import { Admin } from './admin/models/admin.entity';
 import { BotModule } from './bot/bot.module';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { BOT_NAME } from './app.constants';
+import { Bot } from './bot/models/bot.model';
+import { StadiumTime } from './stadium_times/models/stadium_time.models';
+import { Comments } from './comment/models/comment.models';
+import { Order } from './order/models/order.models';
+import { UserCard } from './user_cards/models/user_card.models';
+import { StadiumTimesModule } from './stadium_times/stadium_times.module';
+import { UserCardsModule } from './user_cards/user_cards.module';
+import { OrderModule } from './order/order.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
   imports: [
@@ -32,7 +41,19 @@ import { BOT_NAME } from './app.constants';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Region, District, Category, Comfort, Admin],
+      models: [
+        User,
+        Region,
+        District,
+        Category,
+        Comfort,
+        Admin,
+        Bot,
+        StadiumTime,
+        Comments,
+        Order,
+        UserCard,
+      ],
       autoLoadModels: true,
       sync: { alter: true },
       logging: false,
@@ -56,6 +77,10 @@ import { BOT_NAME } from './app.constants';
     ComfortStadiumModule,
     MediaModule,
     BotModule,
+    StadiumTimesModule,
+    UserCardsModule,
+    OrderModule,
+    CommentModule,
   ],
   controllers: [],
   providers: [],
